@@ -23,8 +23,10 @@ namespace XMLChecker
         {
             string folderPath1 = path1_textbox.Text;
             string folderPath2 = path2_textbox.Text;
-            string netArea_fromGui = anlid_textbox.Text;
-            string metering_fromGui = "";
+
+            
+            string netArea_fromGui = anlid_textbox.Text;    // Används inte men spara ifall man vill göra programmet mer modulärt
+            string metering_fromGui = "";                   // Används inte men spara ifall man vill göra programmet mer modulärt
             if (radioButton_tim.Checked)
             {
                 metering_fromGui = "TIM";
@@ -47,10 +49,12 @@ namespace XMLChecker
             {
                 string fileName1 = Path.GetFileName(file1);
                 string fileKey1 = GetFileKey(fileName1);
-                // filekey har ju nu alltså INTE nätområde eller tim/sch, det är part 0 + 1
-                // så då blir det SCH-FLN "-" fileKey1.xml
-                //string fullKey1 = metering + "-" + netArea + "-" + fileKey1;
 
+                /* Används inte men spara ifall man vill göra programmet mer modulärt
+                    filekey har ju nu alltså INTE nätområde eller tim/sch, det är part 0 + 1
+                    så då blir det SCH-FLN "-" fileKey1.xml
+                    string fullKey1 = metering + "-" + netArea + "-" + fileKey1;
+                **/
                 // Look for a corresponding file in folder 2
                 foreach (var file2 in xmlFiles2)
                 {
@@ -114,9 +118,11 @@ namespace XMLChecker
                 // Jämför bladnoder direkt
                 if (node1.Name != node2?.Name || node1.InnerText != node2?.InnerText)
                 {
+                    LogDifference("--------------------------------------------------------");
                     LogDifference($"Difference found in leaf node '{node1.ParentNode.ParentNode.ParentNode.Name}\\{node1.ParentNode.ParentNode.Name}\\{node1.ParentNode.Name}\\{node1.Name}'", true);
                     LogDifference($"File 1({filename1}): {node1.InnerText}", true);
                     LogDifference($"File 2({filename2}): {(node2?.InnerText ?? "Node missing")}", true);
+                    LogDifference("--------------------------------------------------------");
                 }
                 return; // Avsluta om vi är på bladnivå
             }
