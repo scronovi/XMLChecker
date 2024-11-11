@@ -31,14 +31,13 @@
             check_button = new Button();
             path1_textbox = new TextBox();
             path2_textbox = new TextBox();
-            radioButton_tim = new RadioButton();
-            radioButton_sch = new RadioButton();
-            anlid_textbox = new TextBox();
             tablist = new TabControl();
             tabPage1 = new TabPage();
+            klarText = new Label();
             progressBar1 = new ProgressBar();
             tabPage2 = new TabPage();
             logTextBox = new RichTextBox();
+            logClear = new Button();
             tablist.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -46,17 +45,18 @@
             // 
             // check_button
             // 
-            check_button.Location = new Point(197, 335);
+            check_button.BackColor = Color.CornflowerBlue;
+            check_button.Location = new Point(337, 296);
             check_button.Name = "check_button";
-            check_button.Size = new Size(397, 72);
+            check_button.Size = new Size(128, 72);
             check_button.TabIndex = 0;
-            check_button.Text = "Check";
-            check_button.UseVisualStyleBackColor = true;
+            check_button.Text = "Kör";
+            check_button.UseVisualStyleBackColor = false;
             check_button.Click += check_button_Click;
             // 
             // path1_textbox
             // 
-            path1_textbox.Location = new Point(0, 48);
+            path1_textbox.Location = new Point(0, 108);
             path1_textbox.Name = "path1_textbox";
             path1_textbox.PlaceholderText = "Sökväg till mapp 1";
             path1_textbox.Size = new Size(393, 23);
@@ -64,44 +64,17 @@
             // 
             // path2_textbox
             // 
-            path2_textbox.Location = new Point(0, 77);
+            path2_textbox.Location = new Point(0, 185);
             path2_textbox.Name = "path2_textbox";
             path2_textbox.PlaceholderText = "Sökväg till mapp 2";
             path2_textbox.Size = new Size(393, 23);
             path2_textbox.TabIndex = 2;
             // 
-            // radioButton_tim
-            // 
-            radioButton_tim.AutoSize = true;
-            radioButton_tim.Location = new Point(6, 216);
-            radioButton_tim.Name = "radioButton_tim";
-            radioButton_tim.Size = new Size(75, 19);
-            radioButton_tim.TabIndex = 3;
-            radioButton_tim.Text = "Timavläst";
-            radioButton_tim.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_sch
-            // 
-            radioButton_sch.AutoSize = true;
-            radioButton_sch.Location = new Point(99, 216);
-            radioButton_sch.Name = "radioButton_sch";
-            radioButton_sch.Size = new Size(74, 19);
-            radioButton_sch.TabIndex = 4;
-            radioButton_sch.Text = "Schablon";
-            radioButton_sch.UseVisualStyleBackColor = true;
-            // 
-            // anlid_textbox
-            // 
-            anlid_textbox.Location = new Point(6, 187);
-            anlid_textbox.Name = "anlid_textbox";
-            anlid_textbox.PlaceholderText = "Nätområde";
-            anlid_textbox.Size = new Size(387, 23);
-            anlid_textbox.TabIndex = 5;
-            // 
             // tablist
             // 
             tablist.Controls.Add(tabPage1);
             tablist.Controls.Add(tabPage2);
+            tablist.ItemSize = new Size(58, 40);
             tablist.Location = new Point(-2, 0);
             tablist.Name = "tablist";
             tablist.SelectedIndex = 0;
@@ -110,20 +83,32 @@
             // 
             // tabPage1
             // 
-            tabPage1.BackColor = Color.Gainsboro;
-            tabPage1.Controls.Add(radioButton_tim);
-            tabPage1.Controls.Add(radioButton_sch);
+            tabPage1.BackColor = Color.AliceBlue;
+            tabPage1.Controls.Add(logClear);
+            tabPage1.Controls.Add(klarText);
             tabPage1.Controls.Add(progressBar1);
             tabPage1.Controls.Add(check_button);
             tabPage1.Controls.Add(path2_textbox);
             tabPage1.Controls.Add(path1_textbox);
-            tabPage1.Controls.Add(anlid_textbox);
-            tabPage1.Location = new Point(4, 24);
+            tabPage1.Location = new Point(4, 44);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(798, 426);
+            tabPage1.Size = new Size(798, 406);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Program";
+            // 
+            // klarText
+            // 
+            klarText.BackColor = Color.Transparent;
+            klarText.Font = new Font("Verdana", 17.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            klarText.ForeColor = Color.Green;
+            klarText.Location = new Point(337, 243);
+            klarText.Name = "klarText";
+            klarText.Size = new Size(128, 50);
+            klarText.TabIndex = 7;
+            klarText.Text = "KLAR";
+            klarText.TextAlign = ContentAlignment.MiddleCenter;
+            klarText.Visible = false;
             // 
             // progressBar1
             // 
@@ -136,10 +121,10 @@
             // 
             tabPage2.BackColor = Color.Gainsboro;
             tabPage2.Controls.Add(logTextBox);
-            tabPage2.Location = new Point(4, 24);
+            tabPage2.Location = new Point(4, 44);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(798, 426);
+            tabPage2.Size = new Size(798, 406);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Log";
             // 
@@ -151,11 +136,21 @@
             logTextBox.TabIndex = 0;
             logTextBox.Text = "";
             // 
+            // logClear
+            // 
+            logClear.Location = new Point(605, 321);
+            logClear.Name = "logClear";
+            logClear.Size = new Size(75, 23);
+            logClear.TabIndex = 8;
+            logClear.Text = "Rensa log";
+            logClear.UseVisualStyleBackColor = true;
+            logClear.Click += logClear_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlDark;
+            BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(800, 450);
             Controls.Add(tablist);
             Name = "Form1";
@@ -172,13 +167,12 @@
         private Button check_button;
         private TextBox path1_textbox;
         private TextBox path2_textbox;
-        private RadioButton radioButton_tim;
-        private RadioButton radioButton_sch;
-        private TextBox anlid_textbox;
         private TabControl tablist;
         private TabPage tabPage1;
         private TabPage tabPage2;
         private ProgressBar progressBar1;
         private RichTextBox logTextBox;
+        private Label klarText;
+        private Button logClear;
     }
 }
