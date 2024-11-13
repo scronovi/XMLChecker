@@ -89,12 +89,19 @@ namespace XMLChecker
 
         private void CompareXmlNodes(XmlNode node1, XmlNode node2, string filename1, string filename2)
         {
-            // Exkluderar seabxml-head för att timestamps är horig
+            // Exkluderar seabxml-head fÃ¶r att timestamps Ã¤r horig
             if (node1.Name == "seabxml-head" || node2.Name == "seabxml-head")
             {
                 return;
             }
-            // Kontrollera om båda noderna är bladnoder (inga barn)
+            // Exkluderar exportid fÃ¶r att det alltid Ã¤r unikt
+            if (node1.Name == "exportid" || node2.Name == "exportid") 
+            {
+                return;
+            }
+
+            
+            // Kontrollera om bÃ¥da noderna Ã¤r bladnoder (inga barn)
             if (node1.ChildNodes.Count == 0 && (node2 == null || node2.ChildNodes.Count == 0))
             {
 
@@ -109,7 +116,7 @@ namespace XMLChecker
                 return;
             }
 
-            // Om det inte är en bladnod, loopa över barnen i node1
+            // Om det inte Ã¤r en bladnod, loopa Ã¶ver barnen i node1
             for (int i = 0; i < node1.ChildNodes.Count; i++)
             {
                 XmlNode childNode1 = node1.ChildNodes[i];
@@ -117,13 +124,13 @@ namespace XMLChecker
 
                 if (childNode2 != null)
                 {
-                    // Rekursivt jämför barnnoder
+                    // Rekursivt jÃ¤mfÃ¶r barnnoder
                     CompareXmlNodes(childNode1, childNode2, filename1, filename2);
                 }
                 else
                 {
-                    // Om barnnoden saknas i node2 och det är en bladnod, logga som skillnad
-                    if (childNode1.ChildNodes.Count == 0) // Kontrollera att det är en bladnod
+                    // Om barnnoden saknas i node2 och det Ã¤r en bladnod, logga som skillnad
+                    if (childNode1.ChildNodes.Count == 0) // Kontrollera att det Ã¤r en bladnod
                     {
                         LogDifference($"Bladnod '{childNode1.Name}' saknas i fil 2.", true);
                     }
